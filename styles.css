@@ -8,9 +8,6 @@ body {
   background-color: #f2f2f2;
   color: #333;
 }
-img.login-logo {
-  transform: scale(0.3); /* Escala visual rápida */
-}
 
 /* Títulos */
 .title {
@@ -29,7 +26,6 @@ img.login-logo {
 
 /* Login */
 .login-box {
-  overflow: hidden; /* Previene que el logo se desborde */
   max-width: 400px;
   margin: 60px auto;
   padding: 20px;
@@ -46,16 +42,12 @@ img.login-logo {
 .login-box img.login-logo {
   width: 90px;
   height: 90px;
-  max-width: 90px;
-  max-height: 90px;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
   background-color: #e0f2f1;
   padding: 10px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   margin-bottom: 10px;
-  display: block;
-  overflow: hidden;
 }
 
 .login-box input {
