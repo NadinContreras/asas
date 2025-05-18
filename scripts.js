@@ -4,8 +4,8 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     const pass = document.getElementById("password").value;
 
     // Usuarios ficticios
-    if (user === "jefe" && pass === "1234") {
-        showContent("jefe");
+    if (user === "barnaby" && pass === "78382055") {
+        showContent("barnaby");
     } else if (user === "usuario" && pass === "abcd") {
         showContent("general");
     } else {
