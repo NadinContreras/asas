@@ -3,8 +3,9 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     const user = document.getElementById("username").value;
     const pass = document.getElementById("password").value;
 
+
     // Usuarios ficticios
-     if (user === "barnaby" && pass === "78382055") {
+    if (user === "barnaby" && pass === "78382055") {
         showContent("barnaby");
     } else if (user === "nadin" && pass === "1003525827") {
         showContent("nadin");
@@ -27,3 +28,19 @@ function showContent(role) {
 function logout() {
     location.reload();
 }
+
+    // ver contraseña
+
+document.addEventListener("DOMContentLoaded", function () {
+    const togglePassword = document.getElementById("toggle-password");
+    const passwordInput = document.getElementById("password");
+
+    togglePassword.addEventListener("click", function () {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+
+        // Cambia el icono según el estado
+        togglePassword.classList.toggle("fa-eye");
+        togglePassword.classList.toggle("fa-eye-slash");
+    });
+});
