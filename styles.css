@@ -43,14 +43,15 @@ body {
 .login-box img.login-logo {
   width: 90px;
   height: 90px;
-  object-fit: contain; /* cambia a contain para evitar recortes visuales */
+  max-width: 90px;
+  max-height: 90px;
+  object-fit: contain; /* contiene toda la imagen sin distorsionar */
   border-radius: 50%;
   background-color: #e0f2f1;
   padding: 10px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   margin-bottom: 10px;
   display: block;
-  max-width: 100%;
 }
 
 .login-box input {
