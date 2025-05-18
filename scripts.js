@@ -5,9 +5,9 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
 
     // Usuarios ficticios
      if (user === "barnaby" && pass === "78382055") {
-    showContent("barnaby");
+        showContent("barnaby");
     } else if (user === "nadin" && pass === "1003525827") {
-        showContent("general");
+        showContent("nadin");
     } else {
         document.getElementById("login-error").style.display = "block";
     }
