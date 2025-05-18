@@ -26,6 +26,7 @@ body {
 
 /* Login */
 .login-box {
+  overflow: hidden; /* Previene que el logo se desborde */
   max-width: 400px;
   margin: 60px auto;
   padding: 20px;
@@ -42,12 +43,14 @@ body {
 .login-box img.login-logo {
   width: 90px;
   height: 90px;
-  object-fit: cover;
+  object-fit: contain; /* cambia a contain para evitar recortes visuales */
   border-radius: 50%;
   background-color: #e0f2f1;
   padding: 10px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   margin-bottom: 10px;
+  display: block;
+  max-width: 100%;
 }
 
 .login-box input {
