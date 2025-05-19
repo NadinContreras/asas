@@ -38,9 +38,3 @@ function togglePasswordVisibility(icon) {
   icon.classList.toggle("fa-eye");
   icon.classList.toggle("fa-eye-slash");
 }
-
-        // Cambia el icono según el estado
-        togglePassword.classList.toggle("fa-eye");
-        togglePassword.classList.toggle("fa-eye-slash");
-    });
-});
