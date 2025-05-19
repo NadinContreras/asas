@@ -7,6 +7,7 @@ body {
   padding: 20px;
   background-color: #f2f2f2;
   color: #333;
+   
 }
 
 /* Títulos */
@@ -30,7 +31,7 @@ body {
   margin: 60px auto;
   padding: 20px;
   background-color: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -58,6 +59,13 @@ body {
   border-radius: 6px;
   font-size: 16px;
   box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  outline: none;
 }
 
 .login-box button {
@@ -70,10 +78,12 @@ body {
   font-size: 16px;
   width: 100%;
   margin-top: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .login-box button:hover {
   background-color: #388e3c;
+  transform: scale(1.02);
 }
 
 .error-message {
@@ -83,6 +93,46 @@ body {
   font-size: 14px;
 }
 
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background: none;
+}
+
+.form-group label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: white;
+  color: #777;
+  transition: 0.2s ease all;
+  pointer-events: none;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 12px;
+  color: #4CAF50;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+}
 
 /* Botones generales */
 .btn, .dropbtn, .filterbtn {
@@ -253,24 +303,94 @@ a.btn:hover {
   background-color: #0b7dda;
 }
 
+
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* deja espacio si hay ícono */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Etiquetas flotantes para los campos */
+.floating-label {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.floating-label input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background: none;
+}
+
+.floating-label label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: white;
+  padding: 0 4px;
+  color: #777;
+  transition: 0.2s ease all;
+  pointer-events: none;
+}
+
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 12px;
+  color: #4CAF50;
+}
+
+
 /* ver contraseña */
 .password-wrapper {
   position: relative;
   width: 100%;
+  margin-bottom: 15px;
 }
 
 .password-wrapper input {
   width: 100%;
-  padding-right: 40px; /* espacio para el ícono */
+  padding: 10px 40px 10px 10px; /* espacio para el ícono */
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
-.password-wrapper button {
+.password-wrapper i {
   position: absolute;
-  right: 10px;
   top: 50%;
+  right: 12px;
   transform: translateY(-50%);
-  border: none;
-  background: none;
   cursor: pointer;
+  color: #777;
   font-size: 18px;
+  transition: color 0.2s;
+}
+
+.password-wrapper i:hover {
+  color: #333;
 }

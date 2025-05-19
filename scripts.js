@@ -30,6 +30,11 @@ function logout() {
 }
 
     // ver contraseña
+function togglePassword() {
+  const passwordField = document.getElementById("contrasena");
+  const type = passwordField.type === "password" ? "text" : "password";
+  passwordField.type = type;
+}
 
 function togglePasswordVisibility(icon) {
   const passwordInput = document.getElementById("password");
