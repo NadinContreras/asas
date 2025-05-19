@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -10,31 +9,26 @@
   <script src="funciones.js" defer></script> <!-- Nuevo archivo para las funciones previas -->
 </head>
 <body>
-  <!-- Sección de login mejorada -->
-<div id="login-section" class="login-box">
-  <img src="img/Logo_recortado.png" alt="Logo de la Alcaldía" class="login-logo">
-  <h2 class="title">Iniciar sesión</h2>
-  
-  <form id="login-form">
-    <!-- Campo de Usuario con etiqueta flotante -->
-    <div class="floating-label">
-      <input type="text" id="username" name="username" placeholder=" " required>
-      <label for="username">Usuario</label>
-    </div>
-
-    <!-- Campo de Contraseña con ícono para mostrar/ocultar -->
-    <div class="floating-label password-wrapper">
-      <input type="password" id="password" name="password" placeholder=" " required>
-      <label for="password">Contraseña</label>
-      <i class="fa-solid fa-eye" id="toggle-password" onclick="togglePasswordVisibility(this)"></i>
-    </div>
-
-    <!-- Mensaje de error oculto inicialmente -->
+  <!-- Sección de login -->
+  <div id="login-section" class="login-box">
+    <!--<img src="img\Logo.png" alt="Logo" />-->
+    <img src="img/Logo_recortado.png" alt="Icono usuario" class="login-logo">
+    <h2>Iniciar sesión</h2>
+    <form id="login-form">
+      <!-- Campo de Usuario -->
+      <div class="input-wrapper">
+        <input type="text" id="username" placeholder="Usuario" required>
+      </div>
+  <!-- Campo de Contraseña con ícono -->
+      <!--<input type="password" id="password" placeholder="Contraseña" required> -->
+      <div class="password-wrapper">
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <i class="fa-solid fa-eye" id="toggle-password"></i>
+      </div>
+      <button type="submit">Entrar</button>
+    </form>
     <p id="login-error" class="error-message">Usuario o contraseña incorrectos.</p>
-
-    <button type="submit">Entrar</button>
-  </form>
-</div>
+  </div>
 
   <!-- Contenido protegido -->
   <div id="content-section" style="display:none;">
