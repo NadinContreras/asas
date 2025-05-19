@@ -31,13 +31,13 @@ function logout() {
 
     // ver contraseña
 
-document.addEventListener("DOMContentLoaded", function () {
-    const togglePassword = document.getElementById("toggle-password");
-    const passwordInput = document.getElementById("password");
-
-    togglePassword.addEventListener("click", function () {
-        const isPassword = passwordInput.type === "password";
-        passwordInput.type = isPassword ? "text" : "password";
+function togglePasswordVisibility(icon) {
+  const passwordInput = document.getElementById("password");
+  const isPassword = passwordInput.type === "password";
+  passwordInput.type = isPassword ? "text" : "password";
+  icon.classList.toggle("fa-eye");
+  icon.classList.toggle("fa-eye-slash");
+}
 
         // Cambia el icono según el estado
         togglePassword.classList.toggle("fa-eye");
