@@ -110,3 +110,35 @@ function marcarContratosVencidos() {
     }
   }
 }
+
+
+function cambiarAnio() {
+  const anio = document.getElementById('anio-select').value;
+  const contenedor = document.getElementById('contenedor-tabla');
+  const subtitulo = document.querySelector('.subtitle');
+
+  subtitulo.textContent = `Contratación ${anio}`;
+
+  fetch(`contratos_${anio}.html`)
+    .then(res => res.text())
+    .then(html => {
+      contenedor.innerHTML = html;
+
+      // Esperamos un instante a que el DOM se actualice
+      setTimeout(() => {
+        // Ejecutamos nuevamente todas las funciones relacionadas con la tabla
+        contarFilas();             // Actualiza el contador
+        aplicarColoresFechas();    // Colorea filas por fecha
+        ocultarFilasPorFecha();    // Opcional: filtra contratos vencidos o por vencer
+        // Puedes agregar aquí otras funciones personalizadas que dependan de la tabla
+      }, 50);
+    })
+    .catch(err => {
+      contenedor.innerHTML = `<p style="color:red;">Error al cargar contratos ${anio}</p>`;
+      console.error(err);
+    });
+}
+// Opcional: cargar 2025 al iniciar
+document.addEventListener("DOMContentLoaded", () => {
+  cambiarAnio(); // carga por defecto 2025
+});
