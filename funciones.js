@@ -142,3 +142,13 @@ function cambiarAnio() {
 document.addEventListener("DOMContentLoaded", () => {
   cambiarAnio(); // carga por defecto 2025
 });
+
+//para boton de obs
+function abrirObservacion(texto) {
+  document.getElementById("texto-observacion").innerText = texto;
+  document.getElementById("modal-observacion").style.display = "flex";
+}
+
+function cerrarObservacion() {
+  document.getElementById("modal-observacion").style.display = "none";
+}
