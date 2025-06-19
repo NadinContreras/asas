@@ -112,8 +112,13 @@ function marcarContratosVencidos() {
 }
 
 
-function cambiarAnio() {
-  const anio = document.getElementById('anio-select').value;
+// Aquí modifiqué----------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  cambiarAnioConFunciones(); // función nueva que agrupa todo
+});
+
+function cambiarAnioConFunciones() {
+  const anio = document.getElementById('anio-select')?.value || '2025';
   const contenedor = document.getElementById('contenedor-tabla');
   const subtitulo = document.querySelector('.subtitle');
 
@@ -124,24 +129,18 @@ function cambiarAnio() {
     .then(html => {
       contenedor.innerHTML = html;
 
-      // Esperamos un instante a que el DOM se actualice
+      // Asegura que el DOM ya se haya insertado antes de ejecutar funciones
       setTimeout(() => {
-        // Ejecutamos nuevamente todas las funciones relacionadas con la tabla
-        contarFilas();             // Actualiza el contador
-        aplicarColoresFechas();    // Colorea filas por fecha
-        ocultarFilasPorFecha();    // Opcional: filtra contratos vencidos o por vencer
-        // Puedes agregar aquí otras funciones personalizadas que dependan de la tabla
-      }, 50);
+        buscar();
+        marcarContratosVencidos();
+        ordenarPorNumero(); // opcional
+      }, 100); // más tiempo por seguridad
     })
     .catch(err => {
       contenedor.innerHTML = `<p style="color:red;">Error al cargar contratos ${anio}</p>`;
       console.error(err);
     });
 }
-// Opcional: cargar 2025 al iniciar
-document.addEventListener("DOMContentLoaded", () => {
-  cambiarAnio(); // carga por defecto 2025
-});
 
 //para boton de obs
 function abrirObservacion(texto) {
