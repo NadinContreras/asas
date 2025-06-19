@@ -1,9 +1,34 @@
-// funciones.js
+// funciones.js (versión corregida)
 
-window.onload = function () {
-  buscar();
-  marcarContratosVencidos();
-};
+// Esperar a que el DOM esté listo
+document.addEventListener("DOMContentLoaded", () => {
+  cambiarAnioConFunciones(); // Carga por defecto el año seleccionado (2025)
+});
+
+function cambiarAnioConFunciones() {
+  const anio = document.getElementById('anio-select')?.value || '2025';
+  const contenedor = document.getElementById('contenedor-tabla');
+  const subtitulo = document.querySelector('.subtitle');
+
+  subtitulo.textContent = `Contratación ${anio}`;
+
+  fetch(`contratos_${anio}.html`)
+    .then(res => res.text())
+    .then(html => {
+      contenedor.innerHTML = html;
+
+      // Ejecutamos funciones después de insertar el HTML
+      setTimeout(() => {
+        buscar();
+        marcarContratosVencidos();
+        ordenarPorNumero(); // si quieres orden automático al cargar
+      }, 100);
+    })
+    .catch(err => {
+      contenedor.innerHTML = `<p style="color:red;">Error al cargar contratos ${anio}</p>`;
+      console.error(err);
+    });
+}
 
 function buscar() {
   var input = document.getElementById("buscador").value.toLowerCase();
@@ -72,7 +97,8 @@ function ordenarPorNumero() {
 
 function actualizarContador(valor) {
   var texto = valor === 0 ? "No hay contratos visibles" : "Mostrando " + valor + " contratos";
-  document.getElementById("contador").innerText = texto;
+  var contador = document.getElementById("contador");
+  if (contador) contador.innerText = texto;
 }
 
 function marcarContratosVencidos() {
@@ -111,38 +137,6 @@ function marcarContratosVencidos() {
   }
 }
 
-
-// Aquí modifiqué----------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", () => {
-  cambiarAnioConFunciones(); // función nueva que agrupa todo
-});
-
-function cambiarAnioConFunciones() {
-  const anio = document.getElementById('anio-select')?.value || '2025';
-  const contenedor = document.getElementById('contenedor-tabla');
-  const subtitulo = document.querySelector('.subtitle');
-
-  subtitulo.textContent = `Contratación ${anio}`;
-
-  fetch(`contratos_${anio}.html`)
-    .then(res => res.text())
-    .then(html => {
-      contenedor.innerHTML = html;
-
-      // Asegura que el DOM ya se haya insertado antes de ejecutar funciones
-      setTimeout(() => {
-        buscar();
-        marcarContratosVencidos();
-        ordenarPorNumero(); // opcional
-      }, 100); // más tiempo por seguridad
-    })
-    .catch(err => {
-      contenedor.innerHTML = `<p style="color:red;">Error al cargar contratos ${anio}</p>`;
-      console.error(err);
-    });
-}
-
-//para boton de obs
 function abrirObservacion(texto) {
   document.getElementById("texto-observacion").innerText = texto;
   document.getElementById("modal-observacion").style.display = "flex";
