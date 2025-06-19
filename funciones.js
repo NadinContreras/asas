@@ -1,34 +1,10 @@
-// funciones.js (versión corregida)
 
-// Esperar a que el DOM esté listo
-document.addEventListener("DOMContentLoaded", () => {
-  cambiarAnioConFunciones(); // Carga por defecto el año seleccionado (2025)
-});
+// funciones.js (versión final compatible)
 
-function cambiarAnioConFunciones() {
-  const anio = document.getElementById('anio-select')?.value || '2025';
-  const contenedor = document.getElementById('contenedor-tabla');
-  const subtitulo = document.querySelector('.subtitle');
-
-  subtitulo.textContent = `Contratación ${anio}`;
-
-  fetch(`contratos_${anio}.html`)
-    .then(res => res.text())
-    .then(html => {
-      contenedor.innerHTML = html;
-
-      // Ejecutamos funciones después de insertar el HTML
-      setTimeout(() => {
-        buscar();
-        marcarContratosVencidos();
-        ordenarPorNumero(); // si quieres orden automático al cargar
-      }, 100);
-    })
-    .catch(err => {
-      contenedor.innerHTML = `<p style="color:red;">Error al cargar contratos ${anio}</p>`;
-      console.error(err);
-    });
-}
+window.onload = function () {
+  buscar();
+  marcarContratosVencidos();
+};
 
 function buscar() {
   var input = document.getElementById("buscador").value.toLowerCase();
@@ -102,7 +78,10 @@ function actualizarContador(valor) {
 }
 
 function marcarContratosVencidos() {
-  const filas = document.getElementById("tablaContratos").getElementsByTagName("tr");
+  const tabla = document.getElementById("tablaContratos");
+  if (!tabla) return;
+
+  const filas = tabla.getElementsByTagName("tr");
   const hoy = new Date();
 
   for (let i = 1; i < filas.length; i++) {
@@ -136,6 +115,37 @@ function marcarContratosVencidos() {
     }
   }
 }
+
+function cambiarAnio() {
+  const anio = document.getElementById('anio-select').value;
+  const contenedor = document.getElementById('contenedor-tabla');
+  const subtitulo = document.querySelector('.subtitle');
+
+  subtitulo.textContent = `Contratación ${anio}`;
+
+  fetch(`contratos_${anio}.html`)
+    .then(res => res.text())
+    .then(html => {
+      contenedor.innerHTML = html;
+
+      setTimeout(() => {
+        // Ejecutamos funciones necesarias si existen
+        if (typeof contarFilas === "function") contarFilas();
+        if (typeof aplicarColoresFechas === "function") aplicarColoresFechas();
+        if (typeof ocultarFilasPorFecha === "function") ocultarFilasPorFecha();
+        buscar();
+        marcarContratosVencidos();
+      }, 100);
+    })
+    .catch(err => {
+      contenedor.innerHTML = `<p style="color:red;">Error al cargar contratos ${anio}</p>`;
+      console.error(err);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  cambiarAnio(); // carga por defecto 2025
+});
 
 function abrirObservacion(texto) {
   document.getElementById("texto-observacion").innerText = texto;
