@@ -526,3 +526,63 @@ a.btn:hover {
 .btn-info:hover {
   background-color: #b6433e;
 }
+
+
+/* Encabezado principal elegante */
+.main-header {
+  background-color: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 1.4rem 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+}
+
+.main-header {
+  background-color: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 1.4rem 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+}
+
+.toolbar-wrapper {
+  background-color: #eafaf1;
+  padding: 1.2rem 2rem;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 6px 12px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.search-bar input,
+.search-bar select {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: none;
+  padding: 6px 8px;
+}
