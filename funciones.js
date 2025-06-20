@@ -121,7 +121,7 @@ function cambiarAnio() {
   const contenedor = document.getElementById('contenedor-tabla');
   const subtitulo = document.querySelector('.subtitle');
 
-  subtitulo.textContent = `Mostrando contratación del ${anio}`;
+  subtitulo.textContent = `Mostrando contratación del año ${anio}`;
 
   fetch(`contratos_${anio}.html`)
     .then(res => res.text())
