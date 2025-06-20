@@ -106,7 +106,7 @@ function marcarContratosVencidos() {
       if (fechaContrato < hoy) {
         celdaFinal.style.backgroundColor = "#ffcccc";
         celdaFinal.style.fontWeight = "bold";
-        celdaFinal.innerText = fechaTexto + " (VENCIDO)";
+        celdaFinal.innerText = fechaTexto + " (FINALIZADO)";
       } else if (diasRestantes <= 10) {
         celdaFinal.style.backgroundColor = "#fff3cd";
         celdaFinal.style.fontWeight = "bold";
