@@ -7,7 +7,7 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     // Usuarios ficticios
     if (user === "barnaby" && pass === "78382055") {
         showContent("barnaby");
-    } else if (user === "nadin" && pass === "3012705377") {
+    } else if (user === "nadin" && pass === "5588") {
         showContent("nadin");
     } else {
         document.getElementById("login-error").style.display = "block";
