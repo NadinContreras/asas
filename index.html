@@ -38,47 +38,51 @@
   <!-- Contenido protegido -->
   <div id="content-section" style="display:none;">
 
-    <h2 class="title">ALCALDÍA DE SAN ANDRÉS DE SOTAVENTO</h2>
-
-    <div class="top-bar">
-      <input type="text" id="buscador" onkeyup="buscar()" placeholder="Buscar contratos...">
-      <button class="btn" onclick="restablecerBusqueda()">Restablecer</button>
-      <button class="btn" onclick="toggleDarkMode()">Modo Oscuro</button>
-      <button class="btn" onclick="agregarContrato()">Agregar Contrato</button>
-      <button class="btn" onclick="importarCSV()">Importar CSV</button>
-      <button class="btn" onclick="exportarExcel()">Ver en un Excel</button>
-
-      <div class="dropdown">
-        <button class="dropbtn">Decretos</button>
-        <div class="dropdown-content">
-          <a href="https://drive.google.com/drive/folders/1NvdDacjMtjWlel_mW8zTUTvKa-Nw2-5G?usp=drive_link" target="_blank">Ver Decretos</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Resoluciones</button>
-        <div class="dropdown-content">
-          <a href="https://drive.google.com/drive/folders/1t_IOOnq3DcvguGCUMpUz__j_7R6Ph0ts?usp=drive_link" target="_blank">Ver Resoluciones</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Acuerdos</button>
-        <div class="dropdown-content">
-          <a href="https://drive.google.com/drive/folders/18FTjKCzeQKXHI1n_RnQgTw2zpFPIWOV2?usp=drive_link" target="_blank">Ver Acuerdos</a>
-        </div>
-      </div>
-    </div>
-
-
-     <!-- Selector de año -->
-  <div class="year-selector">
-  <label for="anio-select"><strong>Ver contratación de:</strong></label>
-  <select id="anio-select" onchange="cambiarAnio()">
-    <option value="2025" selected>2025</option>
-    <option value="2024">2024</option>
-  </select>
+    <div class="main-header">
+  ALCALDÍA DE SAN ANDRÉS DE SOTAVENTO
 </div>
 
-    <h3 class="subtitle">Contratación 2025</h3>
+
+
+
+<div class="toolbar-wrapper">
+  <div class="top-bar">
+    <div class="search-bar">
+      <input type="text" id="buscador" onkeyup="buscar()" placeholder="Buscar contratos...">
+      <select id="anio-select" onchange="cambiarAnio()">
+        <option value="2025" selected>2025</option>
+        <option value="2024">2024</option>
+      </select>
+    </div>
+    <button class="btn" onclick="restablecerBusqueda()">Restablecer</button>
+    <button class="btn" onclick="toggleDarkMode()">Modo Oscuro</button>
+    <button class="btn" onclick="agregarContrato()">Agregar Contrato</button>
+    <button class="btn" onclick="importarCSV()">Importar CSV</button>
+    <button class="btn" onclick="exportarExcel()">Ver en un Excel</button>
+
+    <div class="dropdown">
+      <button class="dropbtn">Decretos</button>
+      <div class="dropdown-content">
+        <a href="https://drive.google.com/drive/folders/1NvdDacjMtjWlel_mW8zTUTvKa-Nw2-5G?usp=drive_link" target="_blank">Ver Decretos</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Resoluciones</button>
+      <div class="dropdown-content">
+        <a href="https://drive.google.com/drive/folders/1t_IOOnq3DcvguGCUMpUz__j_7R6Ph0ts?usp=drive_link" target="_blank">Ver Resoluciones</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Acuerdos</button>
+      <div class="dropdown-content">
+        <a href="https://drive.google.com/drive/folders/18FTjKCzeQKXHI1n_RnQgTw2zpFPIWOV2?usp=drive_link" target="_blank">Ver Acuerdos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <h3 class="subtitle">Mostrando contratación 2025</h3>
 
     <div class="row-controls">
       <div class="left-controls">
