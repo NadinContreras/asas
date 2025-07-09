@@ -155,3 +155,23 @@ function abrirObservacion(texto) {
 function cerrarObservacion() {
   document.getElementById("modal-observacion").style.display = "none";
 }
+
+
+//Funcion exportar excel
+function exportarExcel() {
+  const tabla = document.querySelector("table");
+  const filas = Array.from(tabla.querySelectorAll("tr"));
+
+  const columnasDeseadas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; // índices de las columnas relevantes
+
+  const datos = filas.map(fila => {
+    const celdas = Array.from(fila.querySelectorAll("th, td"));
+    return columnasDeseadas.map(i => celdas[i]?.innerText || "");
+  });
+
+  const hoja = XLSX.utils.aoa_to_sheet(datos);
+  const libro = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(libro, hoja, "Contratos");
+
+  XLSX.writeFile(libro, "Contratos_Alcaldia_2025.xlsx");
+}
