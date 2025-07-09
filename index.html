@@ -54,7 +54,7 @@
     <button class="btn" onclick="restablecerBusqueda()">Restablecer</button>
     <button class="btn" onclick="toggleDarkMode()">Modo Oscuro</button>
     <button class="btn" onclick="agregarContrato()">Agregar Contrato</button>
-    <button class="btn" onclick="exportarExcel()">Ver en un Excel</button>
+    <button onclick="exportarExcel()">Exportar a Excel</button>
 
     <div class="dropdown">
       <button class="dropbtn">Decretos</button>
@@ -99,6 +99,8 @@
 
 <script src="scripts.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  
 </body>
 
 <div id="modal-observacion" class="modal" style="display: none;">
