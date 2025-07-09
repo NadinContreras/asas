@@ -162,7 +162,7 @@ function exportarExcel() {
   const tabla = document.querySelector("table");
   const filas = Array.from(tabla.querySelectorAll("tr"));
 
-  const columnasDeseadas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; // índices de las columnas relevantes
+  const columnasDeseadas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // índices de las columnas relevantes
 
   const datos = filas.map(fila => {
     const celdas = Array.from(fila.querySelectorAll("th, td"));
