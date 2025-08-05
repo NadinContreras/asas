@@ -77,6 +77,8 @@ function actualizarContador(valor) {
   if (contador) contador.innerText = texto;
 }
 
+
+
 function marcarContratosVencidos() {
   const tabla = document.getElementById("tablaContratos");
   if (!tabla) return;
@@ -101,16 +103,35 @@ function marcarContratosVencidos() {
       }
 
       const diferenciaMs = fechaContrato - hoy;
-      const diasRestantes = Math.ceil(diferenciaMs / (1000 * 60 * 60 * 24));
+      const diasTotales = Math.ceil(diferenciaMs / (1000 * 60 * 60 * 24));
 
       if (fechaContrato < hoy) {
         celdaFinal.style.backgroundColor = "#ffcccc";
         celdaFinal.style.fontWeight = "bold";
         celdaFinal.innerText = fechaTexto + " (Concluido)";
-      } else if (diasRestantes <= 10) {        
-        celdaFinal.style.backgroundColor = "#fff3cd";
+      } else {
+        // Calcular meses y días restantes
+        const fechaInicio = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+        const fechaFin = new Date(fechaContrato.getFullYear(), fechaContrato.getMonth(), fechaContrato.getDate());
+
+        let meses = (fechaFin.getFullYear() - fechaInicio.getFullYear()) * 12 + (fechaFin.getMonth() - fechaInicio.getMonth());
+        let dias = fechaFin.getDate() - fechaInicio.getDate();
+
+        if (dias < 0) {
+          meses--;
+          // Obtener último día del mes anterior
+          const ultimoDiaMesAnterior = new Date(fechaFin.getFullYear(), fechaFin.getMonth(), 0).getDate();
+          dias += ultimoDiaMesAnterior;
+        }
+
+        celdaFinal.style.backgroundColor = diasTotales <= 10 ? "#fff3cd" : ""; // solo resalta si faltan <= 10 días
         celdaFinal.style.fontWeight = "bold";
-        celdaFinal.innerText = fechaTexto + ` (faltan ${diasRestantes} días)`;
+
+        let textoTiempo = "";
+        if (meses > 0) textoTiempo += `${meses} mes${meses > 1 ? "es" : ""} `;
+        if (dias > 0 || meses === 0) textoTiempo += `${dias} día${dias > 1 ? "s" : ""}`;
+
+        celdaFinal.innerText = fechaTexto + ` (faltan ${textoTiempo.trim()})`;
       }
     }
   }
@@ -223,5 +244,6 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
