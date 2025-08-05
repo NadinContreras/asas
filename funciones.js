@@ -178,14 +178,14 @@ function exportarExcel() {
 
 
 
-export function calcularTiempoTrabajado(inicioStr, finStr) {
+function calcularTiempoTrabajado(inicioStr, finStr) {
   const inicio = new Date(inicioStr);
   const fin = new Date(finStr);
   const hoy = new Date();
 
   let fechaFinal;
 
-  // Si la fecha final ya pasó, usamos esa. Si no, usamos hoy.
+  // Si la fecha final ya pasó, se usa; si no, se usa hoy
   if (fin < hoy) {
     fechaFinal = fin;
   } else {
@@ -204,4 +204,28 @@ export function calcularTiempoTrabajado(inicioStr, finStr) {
   texto += `${dias} día${dias !== 1 ? 's' : ''}`;
 
   return texto;
+}
+
+function actualizarTiempoEnTabla() {
+  const tabla = document.getElementById('tablaContratos');
+  if (!tabla) return;
+
+  const filas = tabla.getElementsByTagName('tr');
+
+  for (let i = 1; i < filas.length; i++) {
+    const celdas = filas[i].getElementsByTagName('td');
+    if (celdas.length >= 12) {
+      const fechaInicio = celdas[10].textContent.trim();
+      const fechaFinal = celdas[11].textContent.trim();
+
+      const tiempo = calcularTiempoTrabajado(fechaInicio, fechaFinal);
+
+      if (celdas.length === 13) {
+        const nuevaCelda = filas[i].insertCell(-1);
+        nuevaCelda.textContent = tiempo;
+      } else {
+        celdas[13].textContent = tiempo;
+      }
+    }
+  }
 }
