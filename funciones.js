@@ -135,6 +135,7 @@ function cambiarAnio() {
         if (typeof ocultarFilasPorFecha === "function") ocultarFilasPorFecha();
         buscar();
         marcarContratosVencidos();
+        actualizarTiempoEnTabla();  // ⬅️ Aquí agregas la llamada
       }, 100);
     })
     .catch(err => {
@@ -222,4 +223,5 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
