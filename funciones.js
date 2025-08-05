@@ -175,3 +175,33 @@ function exportarExcel() {
 
   XLSX.writeFile(libro, "Contratos_Alcaldia_2025.xlsx");
 }
+
+
+
+export function calcularTiempoTrabajado(inicioStr, finStr) {
+  const inicio = new Date(inicioStr);
+  const fin = new Date(finStr);
+  const hoy = new Date();
+
+  let fechaFinal;
+
+  // Si la fecha final ya pasó, usamos esa. Si no, usamos hoy.
+  if (fin < hoy) {
+    fechaFinal = fin;
+  } else {
+    fechaFinal = hoy;
+  }
+
+  const diffMs = fechaFinal - inicio;
+  const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const años = Math.floor(diffDias / 365);
+  const meses = Math.floor((diffDias % 365) / 30);
+  const dias = diffDias % 30;
+
+  let texto = '';
+  if (años > 0) texto += `${años} año${años > 1 ? 's' : ''}, `;
+  if (meses > 0 || años > 0) texto += `${meses} mes${meses !== 1 ? 'es' : ''}, `;
+  texto += `${dias} día${dias !== 1 ? 's' : ''}`;
+
+  return texto;
+}
