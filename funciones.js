@@ -183,14 +183,7 @@ function calcularTiempoTrabajado(inicioStr, finStr) {
   const fin = new Date(finStr);
   const hoy = new Date();
 
-  let fechaFinal;
-
-  // Si la fecha final ya pasó, se usa; si no, se usa hoy
-  if (fin < hoy) {
-    fechaFinal = fin;
-  } else {
-    fechaFinal = hoy;
-  }
+  let fechaFinal = fin < hoy ? fin : hoy;
 
   const diffMs = fechaFinal - inicio;
   const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
@@ -229,3 +222,4 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
