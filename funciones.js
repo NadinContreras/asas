@@ -247,6 +247,10 @@ function marcarContratosVencidos() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  cambiarAnio(); // Esto ya dentro llama a calcularTotalInvertido cuando termina de cargar
+});
+
 function cambiarAnio() {
   const anio = document.getElementById('anio-select').value;
   const contenedor = document.getElementById('contenedor-tabla');
@@ -260,13 +264,10 @@ function cambiarAnio() {
       contenedor.innerHTML = html;
 
       setTimeout(() => {
-        // Ejecutamos funciones necesarias si existen
-        if (typeof contarFilas === "function") contarFilas();
-        if (typeof aplicarColoresFechas === "function") aplicarColoresFechas();
-        if (typeof ocultarFilasPorFecha === "function") ocultarFilasPorFecha();
         buscar();
         marcarContratosVencidos();
-        actualizarTiempoEnTabla();  // ⬅️ Aquí agregas la llamada
+        actualizarTiempoEnTabla();
+        calcularTotalInvertido(); // ✅ Ahora sí, cuando la tabla ya está cargada
       }, 100);
     })
     .catch(err => {
@@ -274,11 +275,6 @@ function cambiarAnio() {
       console.error(err);
     });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  cambiarAnio(); // carga por defecto 2025
-});
-
 function abrirObservacion(texto) {
   document.getElementById("texto-observacion").innerText = texto;
   document.getElementById("modal-observacion").style.display = "flex";
@@ -354,6 +350,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
