@@ -2,9 +2,10 @@
 // funciones.js (versión final compatible)
 
 window.onload = function () {
-  buscar(); // si la quieres mantener para otras funciones internas
+  buscar();
   marcarContratosVencidos();
   llenarFiltroDependencia();
+  calcularTotalInvertido(); // ⬅️ Calcula total al inicio
 };
 
 function buscar() {
@@ -34,7 +35,7 @@ function aplicarFiltros() {
   for (let i = 1; i < filas.length; i++) {
     const celdas = filas[i].getElementsByTagName("td");
     const dependenciaCelda = celdas[9] ? celdas[9].textContent.toLowerCase() : "";
-    const valorCelda = celdas[5] ? celdas[5].textContent.replace(/[^0-9]/g, "") : "0"; // quitar símbolos
+    const valorCelda = celdas[5] ? celdas[5].textContent.replace(/[^0-9]/g, "") : "0";
     const valor = parseFloat(valorCelda) || 0;
 
     const coincideBusqueda = Array.from(celdas).some(td =>
@@ -45,7 +46,7 @@ function aplicarFiltros() {
     if (coincideBusqueda && coincideDependencia) {
       filas[i].style.display = "";
       count++;
-      total += valor; // sumar solo si pasa el filtro
+      total += valor;
     } else {
       filas[i].style.display = "none";
     }
@@ -65,7 +66,7 @@ function calcularTotalInvertido() {
   let total = 0;
 
   filas.forEach((fila, index) => {
-    if (index === 0) return; // Saltar encabezado
+    if (index === 0) return;
     const valorCelda = fila.cells[5]?.textContent.replace(/[^0-9]/g, "") || "0";
     total += parseFloat(valorCelda) || 0;
   });
@@ -74,56 +75,56 @@ function calcularTotalInvertido() {
 }
 
 function mostrarGrafico() {
-    const modal = document.getElementById("modal-grafico"); // id correcto
-    const ctx = document.getElementById('graficoDependencias').getContext('2d');
+  const modal = document.getElementById("modal-grafico"); // id correcto
+  const ctx = document.getElementById('graficoDependencias').getContext('2d');
 
-    let dataPorDependencia = {};
+  let dataPorDependencia = {};
 
-    document.querySelectorAll("#tablaContratos tr").forEach((fila, index) => {
-        if (index === 0) return; // Saltar encabezado
-        const dependencia = fila.cells[9]?.textContent.trim(); // Columna Dependencia
-        const valorTexto = fila.cells[5]?.textContent.replace(/[^0-9]/g, ""); // Columna Valor Total
-        const valor = parseFloat(valorTexto) || 0;
+  document.querySelectorAll("#tablaContratos tr").forEach((fila, index) => {
+    if (index === 0) return;
+    const dependencia = fila.cells[9]?.textContent.trim();
+    const valorTexto = fila.cells[5]?.textContent.replace(/[^0-9]/g, "");
+    const valor = parseFloat(valorTexto) || 0;
 
-        if (dependencia) {
-            dataPorDependencia[dependencia] = (dataPorDependencia[dependencia] || 0) + valor;
-        }
-    });
+    if (dependencia) {
+      dataPorDependencia[dependencia] = (dataPorDependencia[dependencia] || 0) + valor;
+    }
+  });
 
-    const dependencias = Object.keys(dataPorDependencia);
-    const valores = Object.values(dataPorDependencia);
+  const dependencias = Object.keys(dataPorDependencia);
+  const valores = Object.values(dataPorDependencia);
 
-    if (window.grafico) window.grafico.destroy();
+  if (window.grafico) window.grafico.destroy();
 
-    window.grafico = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: dependencias,
-            datasets: [{
-                data: valores,
-                backgroundColor: [
-                    '#4CAF50', '#FF9800', '#2196F3', '#F44336',
-                    '#9C27B0', '#00BCD4', '#8BC34A'
-                ]
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'bottom' },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let value = context.parsed;
-                            return `${context.label}: $${value.toLocaleString()}`;
-                        }
-                    }
-                }
+  window.grafico = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: dependencias,
+      datasets: [{
+        data: valores,
+        backgroundColor: [
+          '#4CAF50', '#FF9800', '#2196F3', '#F44336',
+          '#9C27B0', '#00BCD4', '#8BC34A'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              let value = context.parsed;
+              return `${context.label}: $${value.toLocaleString()}`;
             }
+          }
         }
-    });
+      }
+    }
+  });
 
-    modal.style.display = "flex";
+  modal.style.display = "flex";
 }
 
 function restablecerBusqueda() {
@@ -348,6 +349,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
