@@ -29,9 +29,14 @@ function aplicarFiltros() {
   const filas = document.getElementById("tablaContratos").getElementsByTagName("tr");
 
   let count = 0;
+  let total = 0;
+
   for (let i = 1; i < filas.length; i++) {
     const celdas = filas[i].getElementsByTagName("td");
     const dependenciaCelda = celdas[9] ? celdas[9].textContent.toLowerCase() : "";
+    const valorCelda = celdas[5] ? celdas[5].textContent.replace(/[^0-9]/g, "") : "0"; // quitar símbolos
+    const valor = parseFloat(valorCelda) || 0;
+
     const coincideBusqueda = Array.from(celdas).some(td =>
       td.textContent.toLowerCase().includes(textoBusqueda)
     );
@@ -40,14 +45,20 @@ function aplicarFiltros() {
     if (coincideBusqueda && coincideDependencia) {
       filas[i].style.display = "";
       count++;
+      total += valor; // sumar solo si pasa el filtro
     } else {
       filas[i].style.display = "none";
     }
   }
 
   actualizarContador(count);
+  mostrarTotalInversion(total);
 }
 
+function mostrarTotalInversion(total) {
+  const formato = total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+  document.getElementById("total-inversion").textContent = `Total invertido: ${formato}`;
+}
 function restablecerBusqueda() {
   document.getElementById("buscador").value = "";
   buscar();
@@ -270,6 +281,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
