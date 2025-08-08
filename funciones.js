@@ -2,8 +2,9 @@
 // funciones.js (versión final compatible)
 
 window.onload = function () {
-  buscar();
+  buscar(); // si la quieres mantener para otras funciones internas
   marcarContratosVencidos();
+  llenarFiltroDependencia();
 };
 
 function buscar() {
@@ -19,6 +20,56 @@ function buscar() {
       filas[i].style.display = "none";
     }
   }
+  actualizarContador(count);
+}
+
+function llenarFiltroDependencia() {
+  const filtro = document.getElementById("filtroDependencia");
+  if (!filtro) return;
+
+  filtro.innerHTML = '<option value="">-- Filtrar por dependencia --</option>';
+
+  const filas = document.getElementById("tablaContratos").getElementsByTagName("tr");
+  const dependencias = new Set();
+
+  for (let i = 1; i < filas.length; i++) {
+    const celda = filas[i].cells[9]; // Columna Dependencia
+    if (celda) {
+      const valor = celda.textContent.trim();
+      if (valor) dependencias.add(valor);
+    }
+  }
+
+  dependencias.forEach(dep => {
+    const option = document.createElement("option");
+    option.value = dep;
+    option.textContent = dep;
+    filtro.appendChild(option);
+  });
+}
+
+function aplicarFiltros() {
+  const textoBusqueda = document.getElementById("buscador").value.toLowerCase();
+  const dependenciaSeleccionada = document.getElementById("filtroDependencia").value.toLowerCase();
+  const filas = document.getElementById("tablaContratos").getElementsByTagName("tr");
+
+  let count = 0;
+  for (let i = 1; i < filas.length; i++) {
+    const celdas = filas[i].getElementsByTagName("td");
+    const dependenciaCelda = celdas[9] ? celdas[9].textContent.toLowerCase() : "";
+    const coincideBusqueda = Array.from(celdas).some(td =>
+      td.textContent.toLowerCase().includes(textoBusqueda)
+    );
+    const coincideDependencia = dependenciaSeleccionada === "" || dependenciaCelda === dependenciaSeleccionada;
+
+    if (coincideBusqueda && coincideDependencia) {
+      filas[i].style.display = "";
+      count++;
+    } else {
+      filas[i].style.display = "none";
+    }
+  }
+
   actualizarContador(count);
 }
 
@@ -244,6 +295,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
