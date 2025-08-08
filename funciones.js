@@ -65,18 +65,13 @@ function calcularTotalInvertido() {
   let total = 0;
 
   filas.forEach((fila, index) => {
-    if (index === 0) return; // saltar encabezado
+    if (index === 0) return; // Saltar encabezado
     const valorCelda = fila.cells[5]?.textContent.replace(/[^0-9]/g, "") || "0";
     total += parseFloat(valorCelda) || 0;
   });
 
   mostrarTotalInversion(total);
 }
-
-// Llamar cuando cargue la tabla
-document.addEventListener("DOMContentLoaded", () => {
-  calcularTotalInvertido();
-});
 
 function mostrarGrafico() {
     const modal = document.getElementById("modal-grafico"); // id correcto
@@ -85,9 +80,9 @@ function mostrarGrafico() {
     let dataPorDependencia = {};
 
     document.querySelectorAll("#tablaContratos tr").forEach((fila, index) => {
-        if (index === 0) return; // encabezado
-        const dependencia = fila.cells[9]?.textContent.trim();
-        const valorTexto = fila.cells[5]?.textContent.replace(/[^0-9]/g, "");
+        if (index === 0) return; // Saltar encabezado
+        const dependencia = fila.cells[9]?.textContent.trim(); // Columna Dependencia
+        const valorTexto = fila.cells[5]?.textContent.replace(/[^0-9]/g, ""); // Columna Valor Total
         const valor = parseFloat(valorTexto) || 0;
 
         if (dependencia) {
@@ -353,6 +348,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
