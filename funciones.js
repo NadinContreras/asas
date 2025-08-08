@@ -61,55 +61,54 @@ function mostrarTotalInversion(total) {
 }
 
 function mostrarGrafico() {
-    // Aquí obtenemos datos reales desde la tabla filtrada
-    let dependencias = {};
-    let filas = document.querySelectorAll("#contenedor-tabla table tbody tr");
+    const modal = document.getElementById("modalGrafico");
+    const ctx = document.getElementById('graficoDependencias').getContext('2d');
 
-    filas.forEach(fila => {
-        let dependencia = fila.cells[2].innerText; // ajusta el índice a tu tabla
-        let valor = parseFloat(fila.cells[4].innerText.replace(/[^0-9.-]+/g,"")) || 0; // ajusta el índice
-        dependencias[dependencia] = (dependencias[dependencia] || 0) + valor;
-    });
+    // Calcula los datos desde tu tabla/array de contratos filtrados
+    const dependencias = ["Gobierno", "Planeación", "Obras", "Educación", "Umata"];
+    const valores = [5000000, 3000000, 7000000, 2000000, 4000000]; // <- aquí pondrás tu cálculo real
 
-    let labels = Object.keys(dependencias);
-    let valores = Object.values(dependencias);
+    // Si ya hay un gráfico anterior, destrúyelo
+    if (window.grafico) {
+        window.grafico.destroy();
+    }
 
-    // Mostrar modal
-    document.getElementById("modal-grafico").style.display = "block";
-
-    // Crear gráfico
-    let ctx = document.getElementById("graficoDependencias").getContext("2d");
-    new Chart(ctx, {
-        type: 'bar',
+    // Crear gráfico tipo pastel
+    window.grafico = new Chart(ctx, {
+        type: 'pie',
         data: {
-            labels: labels,
+            labels: dependencias,
             datasets: [{
-                label: 'Total Invertido',
                 data: valores,
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
+                backgroundColor: [
+                    '#4CAF50',
+                    '#FF9800',
+                    '#2196F3',
+                    '#F44336',
+                    '#9C27B0'
+                ]
             }]
         },
         options: {
             responsive: true,
             plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: value => '$' + value.toLocaleString()
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let value = context.parsed;
+                            return `${context.label}: $${value.toLocaleString()}`;
+                        }
                     }
                 }
             }
         }
     });
-}
 
-function cerrarGrafico() {
-    document.getElementById("modal-grafico").style.display = "none";
+    // Mostrar modal
+    modal.style.display = "flex";
 }
 
 function restablecerBusqueda() {
@@ -334,6 +333,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
