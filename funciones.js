@@ -60,34 +60,46 @@ function mostrarTotalInversion(total) {
   document.getElementById("total-inversion").textContent = `Total invertido: ${formato}`;
 }
 
+function calcularTotalInvertido() {
+  const filas = document.querySelectorAll("#tablaContratos tr");
+  let total = 0;
+
+  filas.forEach((fila, index) => {
+    if (index === 0) return; // saltar encabezado
+    const valorCelda = fila.cells[5]?.textContent.replace(/[^0-9]/g, "") || "0";
+    total += parseFloat(valorCelda) || 0;
+  });
+
+  mostrarTotalInversion(total);
+}
+
+// Llamar cuando cargue la tabla
+document.addEventListener("DOMContentLoaded", () => {
+  calcularTotalInvertido();
+});
+
 function mostrarGrafico() {
-    const modal = document.getElementById("modalGrafico");
+    const modal = document.getElementById("modal-grafico"); // id correcto
     const ctx = document.getElementById('graficoDependencias').getContext('2d');
 
-    // Objeto para acumular valores por dependencia
     let dataPorDependencia = {};
 
-    // Aquí recorro las filas visibles de la tabla
-    document.querySelectorAll("#tablaContratos tbody tr").forEach(fila => {
-        const dependencia = fila.querySelector("td:nth-child(6)")?.innerText.trim(); // columna 6 = Dependencia
-        const valorTexto = fila.querySelector("td:nth-child(4)")?.innerText.replace(/[^\d,-]/g, ''); // columna 4 = Valor
-        const valor = parseFloat(valorTexto.replace(/\./g, '').replace(',', '.')) || 0;
+    document.querySelectorAll("#tablaContratos tr").forEach((fila, index) => {
+        if (index === 0) return; // encabezado
+        const dependencia = fila.cells[9]?.textContent.trim();
+        const valorTexto = fila.cells[5]?.textContent.replace(/[^0-9]/g, "");
+        const valor = parseFloat(valorTexto) || 0;
 
         if (dependencia) {
             dataPorDependencia[dependencia] = (dataPorDependencia[dependencia] || 0) + valor;
         }
     });
 
-    // Convertimos el objeto en arrays para el gráfico
     const dependencias = Object.keys(dataPorDependencia);
     const valores = Object.values(dataPorDependencia);
 
-    // Si ya hay un gráfico anterior, destruirlo
-    if (window.grafico) {
-        window.grafico.destroy();
-    }
+    if (window.grafico) window.grafico.destroy();
 
-    // Crear gráfico tipo pastel
     window.grafico = new Chart(ctx, {
         type: 'pie',
         data: {
@@ -95,13 +107,8 @@ function mostrarGrafico() {
             datasets: [{
                 data: valores,
                 backgroundColor: [
-                    '#4CAF50',
-                    '#FF9800',
-                    '#2196F3',
-                    '#F44336',
-                    '#9C27B0',
-                    '#00BCD4',
-                    '#8BC34A'
+                    '#4CAF50', '#FF9800', '#2196F3', '#F44336',
+                    '#9C27B0', '#00BCD4', '#8BC34A'
                 ]
             }]
         },
@@ -121,7 +128,6 @@ function mostrarGrafico() {
         }
     });
 
-    // Mostrar modal
     modal.style.display = "flex";
 }
 
@@ -347,6 +353,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
