@@ -586,3 +586,30 @@ a.btn:hover {
   background: none;
   padding: 6px 8px;
 }
+
+.total-container {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.total-inversion {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+#btn-ver-grafico {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#btn-ver-grafico:hover {
+    background-color: #218838;
+}
+
