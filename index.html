@@ -44,9 +44,9 @@
 
 <div class="toolbar-wrapper">
   <div class="top-bar">
-
-    <!-- Contenedor buscador + total -->
-    <div class="search-container">
+    
+     <!-- Grupo buscador y filtros -->
+    <div class="filtros-container">
       <div class="search-bar">
         <input type="text" id="buscador" onkeyup="buscar()" placeholder="Buscar contratos...">
         <select id="anio-select" onchange="cambiarAnio()">
@@ -63,38 +63,24 @@
         </select>
       </div>
 
+      <!-- Total debajo -->
       <div class="total-container">
-        <div id="total-inversion" class="total-inversion">
-          Invertido: $0
-        </div>
+        <span id="total-inversion" class="total-inversion">Invertido: $0</span>
         <button id="btn-ver-grafico" onclick="mostrarGrafico()">Ver gráfico</button>
       </div>
     </div>
 
-    <!-- Botones -->
-    <button class="btn" onclick="restablecerBusqueda()">Restablecer</button>
-    <button class="btn" onclick="toggleDarkMode()">Modo Oscuro</button>
-    <button class="btn" onclick="agregarContrato()">Agregar Contrato</button>
-    <button class="btn" onclick="exportarExcel()">Exportar a Excel</button>
+    <!-- Botones alineados -->
+    <div class="botones-acciones">
+      <button class="btn" onclick="restablecerBusqueda()">Restablecer</button>
+      <button class="btn" onclick="toggleDarkMode()">Modo Oscuro</button>
+      <button class="btn" onclick="agregarContrato()">Agregar Contrato</button>
+      <button class="btn" onclick="exportarExcel()">Exportar a Excel</button>
+      <button class="btn">Decretos</button>
+      <button class="btn">Resoluciones</button>
+      <button class="btn">Acuerdos</button>
+    </div>
 
-    <div class="dropdown">
-      <button class="dropbtn">Decretos</button>
-      <div class="dropdown-content">
-        <a href="https://drive.google.com/drive/folders/1NvdDacjMtjWlel_mW8zTUTvKa-Nw2-5G?usp=drive_link" target="_blank">Ver Decretos</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">Resoluciones</button>
-      <div class="dropdown-content">
-        <a href="https://drive.google.com/drive/folders/1t_IOOnq3DcvguGCUMpUz__j_7R6Ph0ts?usp=drive_link" target="_blank">Ver Resoluciones</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">Acuerdos</button>
-      <div class="dropdown-content">
-        <a href="https://drive.google.com/drive/folders/18FTjKCzeQKXHI1n_RnQgTw2zpFPIWOV2?usp=drive_link" target="_blank">Ver Acuerdos</a>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -134,6 +120,7 @@
 </div>
   
 </html>
+
 
 
 
