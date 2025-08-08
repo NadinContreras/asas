@@ -127,6 +127,11 @@ function mostrarGrafico() {
   modal.style.display = "flex";
 }
 
+function cerrarGrafico() {
+  const modal = document.getElementById("modal-grafico");
+  modal.style.display = "none";
+}
+
 function restablecerBusqueda() {
   document.getElementById("buscador").value = "";
   buscar();
@@ -349,6 +354,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
