@@ -50,6 +50,10 @@
         <option value="2025" selected>2025</option>
         <option value="2024">2024</option>
       </select>
+      <!-- Nuevo filtro de dependencia -->
+  <select id="filtroDependencia" onchange="aplicarFiltros()">
+    <option value="">-- Filtrar por dependencia --</option>
+  </select>
     </div>
     <button class="btn" onclick="restablecerBusqueda()">Restablecer</button>
     <button class="btn" onclick="toggleDarkMode()">Modo Oscuro</button>
@@ -112,3 +116,4 @@
 </div>
   
 </html>
+
