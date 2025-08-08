@@ -64,11 +64,25 @@ function mostrarGrafico() {
     const modal = document.getElementById("modalGrafico");
     const ctx = document.getElementById('graficoDependencias').getContext('2d');
 
-    // Calcula los datos desde tu tabla/array de contratos filtrados
-    const dependencias = ["Gobierno", "Planeación", "Obras", "Educación", "Umata"];
-    const valores = [5000000, 3000000, 7000000, 2000000, 4000000]; // <- aquí pondrás tu cálculo real
+    // Objeto para acumular valores por dependencia
+    let dataPorDependencia = {};
 
-    // Si ya hay un gráfico anterior, destrúyelo
+    // Aquí recorro las filas visibles de la tabla
+    document.querySelectorAll("#tablaContratos tbody tr").forEach(fila => {
+        const dependencia = fila.querySelector("td:nth-child(6)")?.innerText.trim(); // columna 6 = Dependencia
+        const valorTexto = fila.querySelector("td:nth-child(4)")?.innerText.replace(/[^\d,-]/g, ''); // columna 4 = Valor
+        const valor = parseFloat(valorTexto.replace(/\./g, '').replace(',', '.')) || 0;
+
+        if (dependencia) {
+            dataPorDependencia[dependencia] = (dataPorDependencia[dependencia] || 0) + valor;
+        }
+    });
+
+    // Convertimos el objeto en arrays para el gráfico
+    const dependencias = Object.keys(dataPorDependencia);
+    const valores = Object.values(dataPorDependencia);
+
+    // Si ya hay un gráfico anterior, destruirlo
     if (window.grafico) {
         window.grafico.destroy();
     }
@@ -85,16 +99,16 @@ function mostrarGrafico() {
                     '#FF9800',
                     '#2196F3',
                     '#F44336',
-                    '#9C27B0'
+                    '#9C27B0',
+                    '#00BCD4',
+                    '#8BC34A'
                 ]
             }]
         },
         options: {
             responsive: true,
             plugins: {
-                legend: {
-                    position: 'bottom'
-                },
+                legend: { position: 'bottom' },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
@@ -333,6 +347,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
