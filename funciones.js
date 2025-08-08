@@ -59,6 +59,59 @@ function mostrarTotalInversion(total) {
   const formato = total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
   document.getElementById("total-inversion").textContent = `Total invertido: ${formato}`;
 }
+
+function mostrarGrafico() {
+    // Aquí obtenemos datos reales desde la tabla filtrada
+    let dependencias = {};
+    let filas = document.querySelectorAll("#contenedor-tabla table tbody tr");
+
+    filas.forEach(fila => {
+        let dependencia = fila.cells[2].innerText; // ajusta el índice a tu tabla
+        let valor = parseFloat(fila.cells[4].innerText.replace(/[^0-9.-]+/g,"")) || 0; // ajusta el índice
+        dependencias[dependencia] = (dependencias[dependencia] || 0) + valor;
+    });
+
+    let labels = Object.keys(dependencias);
+    let valores = Object.values(dependencias);
+
+    // Mostrar modal
+    document.getElementById("modal-grafico").style.display = "block";
+
+    // Crear gráfico
+    let ctx = document.getElementById("graficoDependencias").getContext("2d");
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total Invertido',
+                data: valores,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: value => '$' + value.toLocaleString()
+                    }
+                }
+            }
+        }
+    });
+}
+
+function cerrarGrafico() {
+    document.getElementById("modal-grafico").style.display = "none";
+}
+
 function restablecerBusqueda() {
   document.getElementById("buscador").value = "";
   buscar();
@@ -281,6 +334,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
