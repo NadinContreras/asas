@@ -75,19 +75,24 @@ function calcularTotalInvertido() {
 }
 
 function mostrarGrafico() {
-  const modal = document.getElementById("modal-grafico"); // id correcto
+  const modal = document.getElementById("modal-grafico");
   const ctx = document.getElementById('graficoDependencias').getContext('2d');
 
   let dataPorDependencia = {};
+  let contratosPorDependencia = {};
+  let totalGlobal = 0;
 
+  // Recorrer solo filas visibles
   document.querySelectorAll("#tablaContratos tr").forEach((fila, index) => {
-    if (index === 0) return;
+    if (index === 0 || fila.style.display === "none") return; // Saltar encabezado y ocultas
     const dependencia = fila.cells[9]?.textContent.trim();
     const valorTexto = fila.cells[5]?.textContent.replace(/[^0-9]/g, "");
     const valor = parseFloat(valorTexto) || 0;
 
     if (dependencia) {
       dataPorDependencia[dependencia] = (dataPorDependencia[dependencia] || 0) + valor;
+      contratosPorDependencia[dependencia] = (contratosPorDependencia[dependencia] || 0) + 1;
+      totalGlobal += valor;
     }
   });
 
@@ -96,15 +101,16 @@ function mostrarGrafico() {
 
   if (window.grafico) window.grafico.destroy();
 
+  // Crear gráfico tipo DONA
   window.grafico = new Chart(ctx, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: dependencias,
       datasets: [{
         data: valores,
         backgroundColor: [
           '#4CAF50', '#FF9800', '#2196F3', '#F44336',
-          '#9C27B0', '#00BCD4', '#8BC34A'
+          '#9C27B0', '#00BCD4', '#8BC34A', '#FFC107'
         ]
       }]
     },
@@ -115,18 +121,43 @@ function mostrarGrafico() {
         tooltip: {
           callbacks: {
             label: function (context) {
-              let value = context.parsed;
-              return `${context.label}: $${value.toLocaleString()}`;
+              const dep = context.label;
+              const valor = context.parsed;
+              const contratos = contratosPorDependencia[dep] || 0;
+              const porcentaje = ((valor / totalGlobal) * 100).toFixed(1);
+              return `${dep}: ${contratos} contratos - $${valor.toLocaleString()} (${porcentaje}%)`;
             }
           }
+        },
+        // Mostrar el total en el centro
+        doughnutLabel: {
+          labels: [
+            {
+              text: `Total: $${totalGlobal.toLocaleString()}`,
+              font: { size: '16' }
+            }
+          ]
         }
       }
-    }
+    },
+    plugins: [{
+      id: 'centerText',
+      beforeDraw: (chart) => {
+        const { width } = chart;
+        const { height } = chart;
+        const ctx = chart.ctx;
+        ctx.restore();
+        ctx.font = "bold 16px Arial";
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.fillText(`Total: $${totalGlobal.toLocaleString()}`, width / 2, height / 2);
+        ctx.save();
+      }
+    }]
   });
 
   modal.style.display = "flex";
 }
-
 function cerrarGrafico() {
   const modal = document.getElementById("modal-grafico");
   modal.style.display = "none";
@@ -350,6 +381,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
