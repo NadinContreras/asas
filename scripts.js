@@ -7,7 +7,7 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     // Usuarios ficticios
     if (user === "barnaby" && pass === "78382055") {
         showContent("barnaby");
-    } else if (user === "nadin" && pass === "5588") {
+    } else if (user === "nadin" && pass === "2630") {
         showContent("nadin");
     } else {
         document.getElementById("login-error").style.display = "block";
@@ -43,3 +43,4 @@ function togglePasswordVisibility(icon) {
   icon.classList.toggle("fa-eye");
   icon.classList.toggle("fa-eye-slash");
 }
+
