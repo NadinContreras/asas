@@ -58,7 +58,7 @@ function aplicarFiltros() {
 
 function mostrarTotalInversion(total) {
   const formato = total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
-  document.getElementById("total-inversion").textContent = `Total invertido: ${formato}`;
+  document.getElementById("total-inversion").textContent = `Inversión: ${formato}`;
 }
 
 function calcularTotalInvertido() {
@@ -381,6 +381,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
