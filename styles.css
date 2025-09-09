@@ -316,20 +316,22 @@ a.btn:hover {
   background-color: #0b7dda;
 }
 
-
 /* Botones de la barra de acciones (Decretos, Resoluciones, Acuerdos) */
-.btn-acciones {
-  background-color: #4CAF50 !important;
-  color: white !important;
+
+.botones-acciones a.btn {
+  background-color: #4CAF50;
+  color: white;
   padding: 8px 12px;
   border-radius: 4px;
   font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* igual que los demás */
   text-decoration: none;
+  display: inline-block;
   transition: background-color 0.3s ease;
 }
 
-.btn-acciones:hover {
-  background-color: #388e3c !important;
+.botones-acciones a.btn:hover {
+  background-color: #388e3c;
 }
 
 
@@ -673,6 +675,7 @@ a.btn:hover {
   gap: 8px;
   margin-top: 10px;
 }
+
 
 
 
