@@ -317,6 +317,21 @@ a.btn:hover {
 }
 
 
+/* Botones de la barra de acciones (Decretos, Resoluciones, Acuerdos) */
+.btn-acciones {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-acciones:hover {
+  background-color: #388e3c !important;
+}
+
 
 .input-wrapper {
   position: relative;
@@ -658,5 +673,6 @@ a.btn:hover {
   gap: 8px;
   margin-top: 10px;
 }
+
 
 
