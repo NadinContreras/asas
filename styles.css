@@ -727,14 +727,14 @@ html, body {
 
 /* Sidebar fijo a la izquierda */
 .sidebar {
-  width: 200px;
-  min-width: 200px;
+  width: 140px;
+  min-width: 140px;
   background-color: #2e7d32;
   color: white;
-  padding: 10px;
+  padding: 6px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   height: 100%;
 }
 
@@ -845,6 +845,7 @@ html, body {
   margin: 0;          /* quita espacios extra de h3 */
   color: #333;        /* opcional, un gris suave */
 }
+
 
 
 
