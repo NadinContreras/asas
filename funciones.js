@@ -213,7 +213,7 @@ function ordenarPorNumero() {
 }
 
 function actualizarContador(valor) {
-  var texto = valor === 0 ? "No hay contratos visibles" : "Mostrando " + valor + " contratos";
+  var texto = valor === 0 ? "No hay contratos visibles" : " " + valor + " contratos";
   var contador = document.getElementById("contador");
   if (contador) contador.innerText = texto;
 }
@@ -287,7 +287,7 @@ function cambiarAnio() {
   const contenedor = document.getElementById('contenedor-tabla');
   const subtitulo = document.querySelector('.subtitle');
 
-  subtitulo.textContent = `Mostrando contratación del año ${anio}`;
+  subtitulo.textContent = `Mostrando contratación del año ${anio} |`;
 
   fetch(`contratos_${anio}.html`)
     .then(res => res.text())
@@ -381,6 +381,7 @@ function actualizarTiempoEnTabla() {
     }
   }
 }
+
 
 
 
