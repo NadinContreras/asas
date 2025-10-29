@@ -1,15 +1,39 @@
 document.getElementById("login-form").addEventListener("submit", function(e) {
     e.preventDefault();
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
 
-
-    // Usuarios ficticios
+    
     if (user === "barnaby" && pass === "78382055") {
-        showContent("barnaby");
-    } else if (user === "nadin" && pass === "2630") {
-        showContent("nadin");
-    } else {
+    document.getElementById("login-section").style.display = "none";
+    document.getElementById("content-section").style.display = "block";
+    }
+    
+    // Dependencias (redirige a carpeta)
+    else if (user === "gobierno" && pass === "1234") {
+        window.location.href = "dependencias/gobierno.html"; 
+    } 
+    else if (user === "JuanM" && pass === "juan2910") {
+        window.location.href = "dependencias/planeacion.html"; 
+    } 
+    else if (user === "obras" && pass === "1234") {
+        window.location.href = "dependencias/obras.html"; 
+    } 
+    else if (user === "educacion" && pass === "1234") {
+        window.location.href = "dependencias/educacion.html"; 
+    } 
+    else if (user === "salud" && pass === "1234") {
+        window.location.href = "dependencias/salud.html"; 
+    } 
+    else if (user === "umata" && pass === "1234") {
+        window.location.href = "dependencias/umata.html"; 
+    } 
+    else if (user === "hacienda" && pass === "1234") {
+        window.location.href = "dependencias/hacienda.html"; 
+    } 
+
+    // Error
+    else {
         document.getElementById("login-error").style.display = "block";
     }
 });
