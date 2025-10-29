@@ -5,7 +5,7 @@ window.onload = function () {
   buscar();
   marcarContratosVencidos();
   llenarFiltroDependencia();
-  calcularTotalInvertido(); // ⬅️ Calcula total al inicio
+  calcularTotalInvertido();
 };
 
 function buscar() {
